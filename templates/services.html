@@ -14,7 +14,8 @@
         <h3>{{this.name}}</h3>
         <p>{{this.description}}</p>
 
-        {{#if this.bullets.length}}
+        {{!-- FIXED: Handlebars cannot evaluate .length --}}
+        {{#if this.bullets}}
         <ul style="margin:0.75rem 0 0.75rem 1.2rem; color:#555; font-size:0.95rem;">
           {{#each this.bullets}}
           <li>{{this}}</li>
@@ -86,16 +87,27 @@
       </div>
 
       <div class="testimonials-row">
+        {{!-- FIXED: Handlebars cannot do @index lt 2 --}}
         {{#each testimonials}}
-        {{#if @index lt 2}}
-        <div class="card">
-          <p class="quote">“{{this.quote}}”</p>
-          <p class="quote-name">{{this.name}}</p>
-          {{#if this.role}}
-          <p class="quote-role">{{this.role}}</p>
+          {{#if @first}}
+          <div class="card">
+            <p class="quote">“{{this.quote}}”</p>
+            <p class="quote-name">{{this.name}}</p>
+            {{#if this.role}}
+            <p class="quote-role">{{this.role}}</p>
+            {{/if}}
+          </div>
           {{/if}}
-        </div>
-        {{/if}}
+
+          {{#if @second}}
+          <div class="card">
+            <p class="quote">“{{this.quote}}”</p>
+            <p class="quote-name">{{this.name}}</p>
+            {{#if this.role}}
+            <p class="quote-role">{{this.role}}</p>
+            {{/if}}
+          </div>
+          {{/if}}
         {{/each}}
       </div>
 

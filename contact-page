@@ -1,0 +1,100 @@
+<section class="contact-page">
+  <div class="container">
+
+    <!-- HEADER -->
+    <div class="section-header" style="margin-top:2rem;">
+      <h1>Get in Touch</h1>
+      <p>If you have questions or want to talk through what your student needs, I’m here to help.</p>
+    </div>
+
+    <!-- CONTACT GRID -->
+    <div class="about-grid" style="margin-top:2rem;">
+
+      <!-- LEFT COLUMN: CONTACT OPTIONS -->
+      <div>
+        <h2>Ways to reach me</h2>
+
+        <!-- EMAIL -->
+        <p style="margin:1rem 0;">
+          <strong>Email:</strong><br>
+          <a href="mailto:{{site.contactEmail}}" style="color:var(--color-primary);">
+            {{site.contactEmail}}
+          </a>
+        </p>
+
+        <!-- BOOKING LINK -->
+        {{#if site.bookingLink}}
+        <p style="margin:1.5rem 0;">
+          <a href="{{site.bookingLink}}" class="btn-primary">Book a Session</a>
+        </p>
+        {{/if}}
+
+        <!-- OPTIONAL: PHONE (if you add it later) -->
+        {{#if site.phone}}
+        <p style="margin:1rem 0;">
+          <strong>Phone:</strong><br>
+          {{site.phone}}
+        </p>
+        {{/if}}
+
+        <!-- CONTACT FORM (mailto fallback) -->
+        <h3 style="margin-top:2rem;">Send a message</h3>
+        <form action="mailto:{{site.contactEmail}}" method="POST" enctype="text/plain" style="margin-top:1rem;">
+          <label>Name<br>
+            <input type="text" name="name" required
+              style="width:100%; padding:0.6rem; margin-top:0.3rem; border:1px solid #ccc; border-radius:6px;">
+          </label>
+
+          <label style="display:block; margin-top:1rem;">Email<br>
+            <input type="email" name="email" required
+              style="width:100%; padding:0.6rem; margin-top:0.3rem; border:1px solid #ccc; border-radius:6px;">
+          </label>
+
+          <label style="display:block; margin-top:1rem;">Message<br>
+            <textarea name="message" rows="5" required
+              style="width:100%; padding:0.6rem; margin-top:0.3rem; border:1px solid #ccc; border-radius:6px;"></textarea>
+          </label>
+
+          <button type="submit" class="btn-primary" style="margin-top:1rem;">Send Message</button>
+        </form>
+
+        <p style="font-size:0.85rem; color:#777; margin-top:0.5rem;">
+          This form uses a simple email fallback.  
+          Your app can upgrade this to Formspree or a backend endpoint later.
+        </p>
+      </div>
+
+      <!-- RIGHT COLUMN: ABOUT THE EDUCATOR -->
+      <div>
+        <h2>About {{site.ownerName}}</h2>
+        <p>{{site.bio}}</p>
+
+        <div class="about-meta" style="margin-top:1rem;">
+          {{#if site.yearsExperience}}
+          <p><strong>{{site.yearsExperience}}+ years</strong> supporting learners</p>
+          {{/if}}
+
+          {{#if site.subjects.length}}
+          <p><strong>Subjects:</strong> {{site.subjects.join ", "}}</p>
+          {{/if}}
+
+          <p><strong>Based in:</strong> {{site.region}}</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FINAL CTA -->
+    <section style="margin-top:3rem;">
+      <div class="final-cta">
+        <h2>Let’s find the right next step</h2>
+        <p>Whether you’re ready to book or just want to ask a few questions, I’d love to hear from you.</p>
+        <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+          <a href="{{site.bookingLink}}" class="btn-primary">Book a Session</a>
+          <a href="mailto:{{site.contactEmail}}" class="btn-secondary">Email me</a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</section>

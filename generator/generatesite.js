@@ -1,3 +1,5 @@
+// generator/generateSite.js
+
 const fs = require("fs");
 const path = require("path");
 const render = require("./renderTemplate");
@@ -6,72 +8,47 @@ const transform = require("./transformIntakeToSchema");
 async function generateSite(intake) {
   const schema = await transform(intake);
 
-  const siteDir = "./output/site";
+  const siteDir = path.join(__dirname, "..", "output", "site");
+  fs.rmSync(siteDir, { recursive: true, force: true });
   fs.mkdirSync(siteDir, { recursive: true });
 
-  // Homepage
-  fs.writeFileSync(
-    `${siteDir}/index.html`,
-    render("layout.html", {
-      ...schema,
-      pageContent: render("homepage.html", schema)
-    })
-  );
+  // Helper to write pages
+  function writePage(subpath, templateName, data = schema) {
+    const fullDir = path.join(siteDir, subpath);
+    fs.mkdirSync(fullDir, { recursive: true });
 
-  // Services
-  fs.mkdirSync(`${siteDir}/services`, { recursive: true });
-  fs.writeFileSync(
-    `${siteDir}/services/index.html`,
-    render("layout.html", {
+    const html = render("layout.html", {
       ...schema,
-      pageContent: render("services.html", schema)
-    })
-  );
+      pageContent: render(templateName, data)
+    });
 
-  // Testimonials
-  fs.mkdirSync(`${siteDir}/testimonials`, { recursive: true });
-  fs.writeFileSync(
-    `${siteDir}/testimonials/index.html`,
-    render("layout.html", {
-      ...schema,
-      pageContent: render("testimonials.html", schema)
-    })
-  );
+    fs.writeFileSync(path.join(fullDir, "index.html"), html);
+  }
 
-  // Contact
-  fs.mkdirSync(`${siteDir}/contact`, { recursive: true });
-  fs.writeFileSync(
-    `${siteDir}/contact/index.html`,
-    render("layout.html", {
-      ...schema,
-      pageContent: render("contact.html", schema)
-    })
-  );
+  // Core pages
+  writePage("", "homepage.html");
+  writePage("services", "services.html");
+  writePage("testimonials", "testimonials.html");
+  writePage("contact", "contact.html");
 
   // Blog
   if (schema.site.hasBlog) {
-    fs.mkdirSync(`${siteDir}/blog`, { recursive: true });
-    fs.writeFileSync(
-      `${siteDir}/blog/index.html`,
-      render("layout.html", {
-        ...schema,
-        pageContent: render("blog.html", schema)
-      })
-    );
+    writePage("blog", "blog.html");
 
-    // Blog posts
     schema.pages.blog.posts.forEach(post => {
-      const postDir = `${siteDir}/blog/posts/${post.slug}`;
-      fs.mkdirSync(postDir, { recursive: true });
-
-      fs.writeFileSync(
-        `${postDir}/index.html`,
-        render("layout.html", {
-          ...schema,
-          pageContent: render("post.html", { schema, post })
-        })
-      );
+      writePage(`blog/posts/${post.slug}`, "post.html", { schema, post });
     });
+  }
+
+  // Assets folder
+  const assetsDir = path.join(siteDir, "assets");
+  fs.mkdirSync(assetsDir, { recursive: true });
+
+  // Copy logo if provided
+  if (schema.brand.logoUrl && schema.brand.logoUrl.startsWith("uploads/")) {
+    const src = path.join(__dirname, "..", schema.brand.logoUrl);
+    const dest = path.join(assetsDir, "logo.png");
+    if (fs.existsSync(src)) fs.copyFileSync(src, dest);
   }
 
   return siteDir;

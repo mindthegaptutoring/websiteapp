@@ -1,0 +1,36 @@
+<section class="testimonials-page">
+  <div class="container">
+
+    <!-- HEADER -->
+    <div class="section-header" style="margin-top:2rem;">
+      <h1>What Families Are Saying</h1>
+      <p>Real feedback from parents and students who’ve worked with {{site.name}}.</p>
+    </div>
+
+    <!-- TESTIMONIAL GRID -->
+    <div class="testimonials-row" style="margin-top:2rem;">
+      {{#each testimonials}}
+      <div class="card">
+        <p class="quote">“{{this.quote}}”</p>
+        <p class="quote-name">{{this.name}}</p>
+        {{#if this.role}}
+        <p class="quote-role">{{this.role}}</p>
+        {{/if}}
+      </div>
+      {{/each}}
+    </div>
+
+    <!-- OPTIONAL CTA -->
+    <section style="margin-top:3rem;">
+      <div class="final-cta">
+        <h2>Ready to get started?</h2>
+        <p>Your student deserves support that helps them feel confident and capable.</p>
+        <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+          <a href="{{site.bookingLink}}" class="btn-primary">Book a Session</a>
+          <a href="/contact" class="btn-secondary">Contact me</a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</section>

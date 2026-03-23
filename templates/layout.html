@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{site.name}}</title>
+
+  <!-- Brand Variables -->
+  <style>
+    :root {
+      --color-primary: {{brand.primaryColor}};
+      --color-secondary: {{brand.secondaryColor}};
+      --font-heading: {{brand.fontHeading}}, sans-serif;
+      --font-body: {{brand.fontBody}}, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      color: #222;
+      background: #fff;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+      margin: 0 0 0.5em;
+      line-height: 1.2;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 0;
+    }
+
+    nav img.logo {
+      height: 48px;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav a:hover {
+      color: var(--color-primary);
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background: var(--color-primary);
+      color: #fff;
+      padding: 0.75rem 1.4rem;
+      border-radius: 6px;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    .btn-secondary {
+      border: 2px solid var(--color-primary);
+      color: var(--color-primary);
+      padding: 0.75rem 1.4rem;
+      border-radius: 6px;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .btn-secondary:hover {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 4rem;
+      padding: 2rem 0;
+      background: #f7f7f7;
+    }
+
+    footer .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    footer p {
+      margin: 0.3rem 0;
+    }
+
+    @media (max-width: 700px) {
+      nav ul {
+        display: none;
+      }
+      footer .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <header class="container">
+    <nav>
+      <a href="/"><img src="{{brand.logoUrl}}" class="logo" alt="{{site.name}} logo"></a>
+      <ul>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/testimonials">Testimonials</a></li>
+        <li><a href="/contact">Contact</a></li>
+        {{#if site.hasBlog}}
+        <li><a href="/blog">Blog</a></li>
+        {{/if}}
+      </ul>
+      <a href="{{site.bookingLink}}" class="btn-primary">Book Now</a>
+    </nav>
+  </header>
+
+  <!-- PAGE CONTENT -->
+  {{{pageContent}}}
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <img src="{{brand.logoUrl}}" class="logo" alt="{{site.name}} logo" style="height:40px;">
+        <p>{{site.name}}</p>
+        <p>{{site.region}}</p>
+      </div>
+      <div>
+        <p><a href="/services">Services</a></p>
+        <p><a href="/testimonials">Testimonials</a></p>
+        <p><a href="/contact">Contact</a></p>
+        {{#if site.hasBlog}}
+        <p><a href="/blog">Blog</a></p>
+        {{/if}}
+      </div>
+    </div>
+    <div class="container" style="margin-top:1rem;">
+      <p>© {{currentYear}} {{site.name}}. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

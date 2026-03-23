@@ -1,0 +1,68 @@
+<section class="blog-post">
+  <div class="container" style="max-width:800px;">
+
+    <!-- POST HEADER -->
+    <div style="margin-top:2rem;">
+      <h1>{{post.title}}</h1>
+      <p style="color:#777; font-size:0.9rem; margin-top:0.5rem;">
+        {{post.date}}
+        {{#if post.author}}
+        • By {{post.author}}
+        {{/if}}
+      </p>
+    </div>
+
+    <!-- FEATURE IMAGE (optional) -->
+    {{#if post.featureImage}}
+    <div style="margin:1.5rem 0;">
+      <img src="{{post.featureImage}}" alt="{{post.title}}" 
+           style="width:100%; border-radius:10px;">
+    </div>
+    {{/if}}
+
+    <!-- POST CONTENT -->
+    <article style="margin-top:1.5rem; font-size:1.05rem; color:#333; line-height:1.7;">
+      {{{post.content}}}
+    </article>
+
+    <!-- TAGS (optional) -->
+    {{#if post.tags.length}}
+    <div style="margin-top:2rem;">
+      <strong>Tags:</strong>
+      <div style="margin-top:0.5rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        {{#each post.tags}}
+        <span style="
+          background:#eef2ff;
+          padding:0.3rem 0.7rem;
+          border-radius:999px;
+          font-size:0.85rem;
+        ">
+          {{this}}
+        </span>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+
+    <!-- DIVIDER -->
+    <hr style="margin:3rem 0; border:0; border-top:1px solid #eee;">
+
+    <!-- BACK TO BLOG -->
+    <p>
+      <a href="/blog" class="btn-secondary">← Back to Blog</a>
+    </p>
+
+    <!-- FINAL CTA -->
+    <section style="margin-top:3rem;">
+      <div class="final-cta">
+        <h2>Need personalized support?</h2>
+        <p>I’d love to help your student feel confident and capable.</p>
+        <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+          <a href="{{site.bookingLink}}" class="btn-primary">Book a Session</a>
+          <a href="/contact" class="btn-secondary">Contact me</a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</section>

@@ -7,32 +7,32 @@
       <p>Tips, insights, and guidance for {{site.audience}}.</p>
     </div>
 
-    <!-- IF NO POSTS -->
-    {{#if pages.blog.posts.length eq 0}}
-    <div style="margin-top:2rem; padding:2rem; border:1px solid #eee; border-radius:10px; background:#fafafa;">
-      <h3>No posts yet</h3>
-      <p>Check back soon — new articles are on the way.</p>
-    </div>
-    {{/if}}
+    <!-- POSTS OR EMPTY STATE -->
+    {{#if pages.blog.posts}}
+      <!-- POSTS GRID -->
+      <div class="cards-3-tight" style="margin-top:2rem;">
+        {{#each pages.blog.posts}}
+        <div class="card">
+          <h3>{{this.title}}</h3>
+          <p style="color:#555; font-size:0.95rem;">{{this.excerpt}}</p>
 
-    <!-- POSTS GRID -->
-    {{#if pages.blog.posts.length gt 0}}
-    <div class="cards-3-tight" style="margin-top:2rem;">
-      {{#each pages.blog.posts}}
-      <div class="card">
-        <h3>{{this.title}}</h3>
-        <p style="color:#555; font-size:0.95rem;">{{this.excerpt}}</p>
+          <p style="margin-top:0.75rem; font-size:0.85rem; color:#777;">
+            {{this.date}}
+          </p>
 
-        <p style="margin-top:0.75rem; font-size:0.85rem; color:#777;">
-          {{this.date}}
-        </p>
-
-        <p style="margin-top:1rem;">
-          <a href="/blog/{{this.slug}}" class="btn-secondary">Read more</a>
-        </p>
+          <p style="margin-top:1rem;">
+            <a href="/blog/{{this.slug}}" class="btn-secondary">Read more</a>
+          </p>
+        </div>
+        {{/each}}
       </div>
-      {{/each}}
-    </div>
+
+    {{else}}
+      <!-- IF NO POSTS -->
+      <div style="margin-top:2rem; padding:2rem; border:1px solid #eee; border-radius:10px; background:#fafafa;">
+        <h3>No posts yet</h3>
+        <p>Check back soon — new articles are on the way.</p>
+      </div>
     {{/if}}
 
     <!-- OPTIONAL FINAL CTA -->

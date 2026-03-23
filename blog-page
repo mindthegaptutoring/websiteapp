@@ -1,0 +1,51 @@
+<section class="blog-page">
+  <div class="container">
+
+    <!-- HEADER -->
+    <div class="section-header" style="margin-top:2rem;">
+      <h1>Blog</h1>
+      <p>Tips, insights, and guidance for {{site.audience}}.</p>
+    </div>
+
+    <!-- IF NO POSTS -->
+    {{#if pages.blog.posts.length eq 0}}
+    <div style="margin-top:2rem; padding:2rem; border:1px solid #eee; border-radius:10px; background:#fafafa;">
+      <h3>No posts yet</h3>
+      <p>Check back soon — new articles are on the way.</p>
+    </div>
+    {{/if}}
+
+    <!-- POSTS GRID -->
+    {{#if pages.blog.posts.length gt 0}}
+    <div class="cards-3-tight" style="margin-top:2rem;">
+      {{#each pages.blog.posts}}
+      <div class="card">
+        <h3>{{this.title}}</h3>
+        <p style="color:#555; font-size:0.95rem;">{{this.excerpt}}</p>
+
+        <p style="margin-top:0.75rem; font-size:0.85rem; color:#777;">
+          {{this.date}}
+        </p>
+
+        <p style="margin-top:1rem;">
+          <a href="/blog/{{this.slug}}" class="btn-secondary">Read more</a>
+        </p>
+      </div>
+      {{/each}}
+    </div>
+    {{/if}}
+
+    <!-- OPTIONAL FINAL CTA -->
+    <section style="margin-top:3rem;">
+      <div class="final-cta">
+        <h2>Looking for support?</h2>
+        <p>If you’re ready for personalized help, I’d love to work with you.</p>
+        <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+          <a href="{{site.bookingLink}}" class="btn-primary">Book a Session</a>
+          <a href="/contact" class="btn-secondary">Contact me</a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</section>

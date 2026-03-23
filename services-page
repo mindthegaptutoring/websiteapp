@@ -1,0 +1,120 @@
+<section class="services-page">
+  <div class="container">
+
+    <!-- HERO / INTRO -->
+    <div class="section-header" style="margin-top:2rem;">
+      <h1>Support Options for {{site.audience}}</h1>
+      <p>I offer personalized services designed to help your student gain clarity, confidence, and momentum.</p>
+    </div>
+
+    <!-- SERVICE CARDS -->
+    <div class="cards-3-tight" style="margin-top:2rem;">
+      {{#each services}}
+      <div class="card">
+        <h3>{{this.name}}</h3>
+        <p>{{this.description}}</p>
+
+        {{#if this.bullets.length}}
+        <ul style="margin:0.75rem 0 0.75rem 1.2rem; color:#555; font-size:0.95rem;">
+          {{#each this.bullets}}
+          <li>{{this}}</li>
+          {{/each}}
+        </ul>
+        {{/if}}
+
+        {{#if this.price}}
+        <p class="service-price">Starting at {{this.price}}</p>
+        {{/if}}
+
+        <p style="margin-top:1rem;">
+          <a href="{{#if this.ctaLink}}{{this.ctaLink}}{{else}}/contact{{/if}}" class="btn-primary">
+            {{this.ctaLabel}}
+          </a>
+        </p>
+      </div>
+      {{/each}}
+    </div>
+
+    <!-- DECISION HELPER -->
+    <section style="margin-top:3rem;">
+      <div class="section-header">
+        <h2>Not sure which service you need?</h2>
+        <p>Here’s a quick guide based on what families usually come to me for.</p>
+      </div>
+
+      <div class="cards-3">
+        {{#each pages.services.decisionHelper}}
+        <div class="card">
+          <h3>{{this.title}}</h3>
+          <p>{{this.description}}</p>
+          <p style="margin-top:0.75rem;">
+            <a href="{{this.link}}" class="btn-secondary">Learn more</a>
+          </p>
+        </div>
+        {{/each}}
+      </div>
+    </section>
+
+    <!-- PROCESS OVERVIEW -->
+    <section style="margin-top:3rem;">
+      <div class="section-header">
+        <h2>What working together looks like</h2>
+        <p>A simple, supportive process that helps your student move forward.</p>
+      </div>
+
+      <div class="cards-3">
+        <div class="card">
+          <h3>1. Book a session or call</h3>
+          <p>Choose the service that fits your needs and schedule a time that works for you.</p>
+        </div>
+        <div class="card">
+          <h3>2. Personalized plan</h3>
+          <p>We identify goals, challenges, and next steps so your student has a clear path forward.</p>
+        </div>
+        <div class="card">
+          <h3>3. Consistent support</h3>
+          <p>Your student receives ongoing guidance, feedback, and encouragement to stay on track.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS PREVIEW -->
+    <section style="margin-top:3rem;">
+      <div class="section-header">
+        <h2>What families are saying</h2>
+        <p>Real words from parents and students I’ve supported.</p>
+      </div>
+
+      <div class="testimonials-row">
+        {{#each testimonials}}
+        {{#if @index lt 2}}
+        <div class="card">
+          <p class="quote">“{{this.quote}}”</p>
+          <p class="quote-name">{{this.name}}</p>
+          {{#if this.role}}
+          <p class="quote-role">{{this.role}}</p>
+          {{/if}}
+        </div>
+        {{/if}}
+        {{/each}}
+      </div>
+
+      <p style="margin-top:1.5rem;">
+        <a href="/testimonials" class="btn-secondary">Read more testimonials</a>
+      </p>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section style="margin-top:3rem;">
+      <div class="final-cta">
+        <h2>Ready to get started?</h2>
+        <p>Book a session or reach out with questions. I’m here to help you find the right fit.</p>
+        <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+          <a href="{{site.bookingLink}}" class="btn-primary">Book a Session</a>
+          <a href="/contact" class="btn-secondary">Contact me</a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</section>

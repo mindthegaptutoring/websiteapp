@@ -1,0 +1,12 @@
+{
+  "name": "website-builder",
+  "version": "1.0.0",
+  "description": "Static site generator for educators",
+  "main": "run.js",
+  "scripts": {
+    "generate": "node run.js"
+  },
+  "dependencies": {
+    "handlebars": "^4.7.8"
+  }
+}
